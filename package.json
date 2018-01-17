@@ -1,0 +1,7 @@
+{
+  "name": "testing__version-aggregator-service",
+  "description": "Version Aggregator Service",
+  "dependencies": {
+    "carbon-io": "0.6.2"
+  }
+}
