@@ -1,7 +1,7 @@
 # testing__version-aggregator-service
 A service that aggregates testing__version-service's or other testing__version-aggregator-service's.
 
-For example, say you have `testing__version-aggregator-service`'s running on `localhost:8080` and `localhost:8001` and a `testing__version-service` running on `localhost:8000`.
+For example, say you have two `testing__version-aggregator-service`'s running on `localhost:8000` and `localhost:8001` and a `testing__version-service` running on `localhost:9000`.
 
 If you `POST` to `localhost:8080/aggregate` with the following body:
 
@@ -15,8 +15,8 @@ If you `POST` to `localhost:8080/aggregate` with the following body:
       "url": "http://localhost:8001",
       "requestBody": {
         "versionServices": [
-          { "url": "http://localhost:8000" },
-          { "url": "http://localhost:8002" }
+          { "url": "http://localhost:9000" },
+          { "url": "http://localhost:9001" }
         ]
       }
     }
@@ -30,10 +30,10 @@ You should get the following response:
 {
   "versionServices": [
     {
-      "url": "http://localhost:8000",
+      "url": "http://localhost:9000",
       "status": 200,
       "body": {
-        "version": "v3.0.0"
+        "version": "1.0.0"
       }
     }
   ],
@@ -44,14 +44,14 @@ You should get the following response:
       "body": {
         "versionServices": [
           {
-            "url": "http://localhost:8000",
+            "url": "http://localhost:9000",
             "status": 200,
             "body": {
-              "version": "v3.0.0"
+              "version": "1.0.0"
             }
           },
           {
-            "url": "http://localhost:8002",
+            "url": "http://localhost:9002",
             "error": "Error: connect ECONNREFUSED 127.0.0.1:8002"
           }
         ],
