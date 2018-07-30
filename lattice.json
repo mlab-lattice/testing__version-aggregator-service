@@ -19,7 +19,7 @@
   },
 
   "build": {
-	"type": "command_build",
+    "type": "command_build",
 
     "base_image": {
       "repository": "library/node",
