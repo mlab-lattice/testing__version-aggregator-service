@@ -1,0 +1,54 @@
+{
+  "$parameters": {
+    "node_pool": { "type": "string" },
+    "num_instances": {
+      "type": "number",
+      "default": 1
+	}
+  },
+
+  "type": "v1/service",
+
+  "ports": {
+    "8080": {
+      "protocol": "HTTP",
+      "external_access": {
+        "public": true
+      }
+    }
+  },
+
+  "build": {
+	"type": "command_build",
+
+    "base_image": {
+      "repository": "library/node",
+      "tag": "boron"
+    },
+    "command": [
+      "npm",
+      "install"
+    ]
+  },
+
+  "exec": {
+    "command": [
+      "node",
+      "VersionAggregatorService.js"
+    ],
+    "environment": {
+      "PORT": "8080"
+    }
+  },
+
+  "health_check": {
+    "http": {
+      "port": 8080,
+      "path": "/status"
+    }
+  },
+
+  "node_pool": "${node_pool}",
+  "num_instances": "${num_instances}"
+}
+
